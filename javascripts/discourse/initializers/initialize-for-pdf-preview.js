@@ -16,7 +16,7 @@ export default {
         const previewModeSetting = settings.preview_mode;
         const newTabIcon = () => {
           const template = document.createElement("template");
-          template.innerHTML = iconHTML("external-link-alt", {
+          template.innerHTML = iconHTML("fa-solid fa-external-link", {
             class: "new-tab-pdf-icon",
           });
           return template.content.firstChild;
@@ -126,3 +126,25 @@ export default {
     });
   },
 };
+import { withPluginApi } from "discourse/lib/plugin-api";
+import { iconHTML } from "discourse-common/lib/icon-library";
+
+const PREVIEW_HEIGHT = 500;
+
+export default {
+  name: "pdf-previews",
+  initialize(container) {
+    withPluginApi("0.8.41", (api) => {
+      const site = container.lookup("service:site");
+      if (site.mobileView) {
+        return;
+      }
+
+      try {
+        const previewModeSetting = settings.preview_mode;
+        const newTabIcon = () => {
+          const template = document.createElement("template");
+          template.innerHTML = iconHTML("fa-solid fa-external-link", {
+            class: "new-tab-pdf-icon",
+          });
+        const createPreviewElement = () => {
